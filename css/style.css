@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgba(225, 225, 225, 0.5);
+    text-align: center;
+    font-size: 16px;
+}
+.content {
+    margin: 0 auto;
+    max-width: 1000px;
+}
+.form {
+    padding: 15px 0px;
+    background-color:lightsalmon;
+}
+ul {
+    padding: 25px 0px;
+    list-style: none;
+    background-color: #73b8e0;
+}
+ul .form {
+    padding: 0px;
+    background-color: #73b8e0;
+}
+ul li {
+    display: flex;
+    justify-content: space-between;
+    border: 1px, solid, rgb(56, 5, 5);
+}
+
+li span {
+    line-height: 50px;
+}
+.checkBox, .changeWrapper {
+    margin: 10px;
+}
+
+.formButton, .deleteButton, .editButton, .formSelect, .formInput {
+    padding: 5px 10px;    
+}
+.listElem {
+    border:1px, solid, #8b0000;
+}
