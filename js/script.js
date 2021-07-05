@@ -45,6 +45,10 @@ function Form(){
             list.ul.insertBefore(li, list.ul.childNodes[1])
         }
         this.input.value = ''
+        localStorage.list = JSON.stringify(document.querySelector('.listUl').innerHTML)
+        
+
+
     })
 }
 
@@ -61,10 +65,41 @@ function FormClear(){
 function List(){
     this.outerDiv = createDOMElem(divContent, 'div', 'empty', 'listWrapper')
     this.ul = createDOMElem(this.outerDiv, 'ul', 'Список Заданий:', 'listUl')
+
 }
 
 const form = new Form()
-const list = new List()
+let list = new List()
+list.ul.innerHTML += JSON.parse(localStorage.list).slice(15)
+
+
+for (el of document.querySelectorAll('.listElem')){
+    el.querySelector('.deleteButton').addEventListener('click', (event) => {
+        document.querySelector('ul').removeChild(event.target.parentNode.parentNode)
+    })
+    el.querySelector('.editButton').addEventListener('click', (event) => {
+        let ul = event.target.parentNode.parentNode.parentNode
+        let targetLi = event.target.parentNode.parentNode
+        let editForm = (new FormClear).form
+        editForm.st
+        ul.insertBefore(editForm, event.target.parentNode.parentNode)
+        editForm.querySelector('.formButton').addEventListener('click', () => {
+            targetLi.querySelector('span').textContent = editForm.querySelector('.formInput').value
+            ul.removeChild(ul.querySelector('.form'))
+        }) 
+    })
+    el.querySelector('.checkBox').addEventListener('click', (event) => {
+        if (event.target.checked !== false){
+            event.target.parentNode.parentNode.appendChild(event.target.parentNode)
+            event.target.parentNode.style.textDecoration = 'line-through'
+        }else {
+            event.target.parentNode.parentNode.insertBefore(event.target.parentNode, event.target.parentNode.parentNode.childNodes[1])
+            event.target.parentNode.style.textDecoration = 'none'
+        }
+    })
+}
+
+
 
 function Change(){
     this.outerDiv = createDOMElem('empty', 'div', 'empty', 'changeWrapper')
@@ -82,10 +117,11 @@ function Change(){
         editForm.querySelector('.formButton').addEventListener('click', () => {
             targetLi.querySelector('span').textContent = editForm.querySelector('.formInput').value
             ul.removeChild(ul.querySelector('.form'))
-        })
-        
-        
-       
+        }) 
     })
 }
 
+
+
+
+document.addEventListener('unload', () => localStorage.clear)
